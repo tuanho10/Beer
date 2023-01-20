@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/item_style">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <ImageView
+            android:id="@+id/imgBeer"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:layout_margin="15dp"/>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/tvBeerName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:textColor="#232323"
+                android:fontFamily="@font/myfont"
+                tools:ignore="NestedWeights"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/tvBeerPrice"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:textColor="#232323"
+                android:fontFamily="@font/myfont"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:text="Save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Note"
+        android:layout_margin="5dp"/>
+</LinearLayout>
