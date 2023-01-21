@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Beer Interview</string>
+    <string name="beers">Beers</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="no_favorite">No Favorite …</string>
+    <string name="note">Note</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="item_save">Item has been saved</string>
+    <string name="item_already_save">Already save this item</string>
+    <string name="item_update">Item has been updated</string>
+    <string name="item_delete">Item has been deleted</string>
 </resources>

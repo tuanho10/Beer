@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_marginBottom="10dp"
     android:background="@drawable/item_style">
@@ -17,9 +17,10 @@
             android:id="@+id/imgFavoriteBeer"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             android:scaleType="fitCenter"
-            android:layout_margin="15dp"/>
+            android:layout_margin="15dp"
+            android:contentDescription="@string/favorite" />
 
         <LinearLayout
             android:layout_weight="2"
@@ -30,17 +31,18 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/tvFavoriteName"
+                android:id="@+id/txtFavoriteName"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:textSize="12sp"
                 android:textColor="#232323"
                 android:fontFamily="@font/myfont"
-                android:gravity="center_vertical"/>
+                android:gravity="center_vertical"
+                tools:ignore="NestedWeights" />
 
             <TextView
-                android:id="@+id/tvFavoritePrice"
+                android:id="@+id/txtFavoritePrice"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -62,15 +64,16 @@
 
             <Button
                 android:id="@+id/btnDelete"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                tools:ignore="NestedWeights" />
 
             <Button
                 android:id="@+id/btnUpdate"
-                android:text="Update"
+                android:text="@string/update"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -84,6 +87,8 @@
         android:id="@+id/editFavorite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Note"
-        android:layout_margin="5dp"/>
+        android:hint="@string/note"
+        android:layout_margin="5dp"
+        android:autofillHints=""
+        android:inputType="text" />
 </LinearLayout>

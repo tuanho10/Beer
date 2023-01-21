@@ -1,5 +1,6 @@
 package com.example.beer.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,22 +9,23 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.beer.R
-import com.example.beer.adapters.FavoriteBeerRecyclerAdapter
+import com.example.beer.binder.FavoriteItemBinder
+import com.example.beer.data.model.DataDB
 import com.example.beer.databinding.FragmentFavoriteBeersBinding
 import com.example.beer.util.Util
+import mva2.adapter.ListSection
+import mva2.adapter.MultiViewAdapter
 
 
-class FavoriteMeals : Fragment() {
-    lateinit var recyclerView: RecyclerView
+class FavoriteBeersFragment : Fragment() {
     lateinit var fragmentFavoriteBeersBinding: FragmentFavoriteBeersBinding
-    private lateinit var favoriteBeerAdapter: FavoriteBeerRecyclerAdapter
+    private lateinit var multiViewAdapter: MultiViewAdapter
     private lateinit var util: Util
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         util = ViewModelProviders.of(this)[Util::class.java]
-        favoriteBeerAdapter = FavoriteBeerRecyclerAdapter(util)
+        multiViewAdapter = MultiViewAdapter()
     }
 
     override fun onCreateView(
@@ -37,11 +39,14 @@ class FavoriteMeals : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initAdapterFavoriteBeer(view)
+        initAdapterFavoriteBeer()
+        val listSection = ListSection<DataDB>()
+        multiViewAdapter.registerItemBinders(FavoriteItemBinder(util))
+        multiViewAdapter.addSection(listSection)
         util.observeSaveBeer().observe(
             viewLifecycleOwner
         ) { data ->
-            favoriteBeerAdapter.setFavoriteBeers(data!!)
+            listSection.set(data)
             if (data.isEmpty())
                 fragmentFavoriteBeersBinding.txtEmpty.visibility = View.VISIBLE
             else
@@ -49,9 +54,10 @@ class FavoriteMeals : Fragment() {
         }
     }
 
-    private fun initAdapterFavoriteBeer(v: View) {
-        recyclerView = v.findViewById<RecyclerView>(R.id.recycleViewFavorite)
-        recyclerView.adapter = favoriteBeerAdapter
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+    private fun initAdapterFavoriteBeer() {
+        fragmentFavoriteBeersBinding.recycleViewFavorite.apply {
+            adapter = multiViewAdapter
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        }
     }
 }

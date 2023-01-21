@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_marginBottom="10dp"
     android:background="@drawable/item_style">
@@ -18,9 +17,10 @@
             android:id="@+id/imgBeer"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             android:scaleType="fitCenter"
-            android:layout_margin="15dp"/>
+            android:layout_margin="15dp"
+            android:contentDescription="@string/beers" />
 
         <LinearLayout
             android:layout_gravity="center"
@@ -32,7 +32,7 @@
             android:layout_marginTop="15dp">
 
             <TextView
-                android:id="@+id/tvBeerName"
+                android:id="@+id/txtBeerName"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -43,7 +43,7 @@
                 android:gravity="center_vertical"/>
 
             <TextView
-                android:id="@+id/tvBeerPrice"
+                android:id="@+id/txtBeerPrice"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -57,7 +57,7 @@
 
         <Button
             android:id="@+id/btnSave"
-            android:text="Save"
+            android:text="@string/save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -70,6 +70,8 @@
         android:id="@+id/editNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Note"
-        android:layout_margin="5dp"/>
+        android:hint="@string/note"
+        android:layout_margin="5dp"
+        android:autofillHints=""
+        android:inputType="text" />
 </LinearLayout>

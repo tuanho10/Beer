@@ -10,14 +10,16 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beer.R
-import com.example.beer.adapters.*
+import com.example.beer.binder.*
 import com.example.beer.data.model.*
 import com.example.beer.databinding.FragmentHomeBinding
 import com.example.beer.util.Util
 import com.example.beer.viewmodel.BaseViewModel
+import mva2.adapter.ListSection
+import mva2.adapter.MultiViewAdapter
 
 class HomeFragment : Fragment() {
-    private lateinit var beerAdapter: BeerRecyclerAdapter
+    private lateinit var multiViewAdapter: MultiViewAdapter
     private lateinit var util: Util
     lateinit var fragmentHomeBinding: FragmentHomeBinding
 
@@ -25,7 +27,7 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         fragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
         util = ViewModelProviders.of(this)[Util::class.java]
-        beerAdapter = BeerRecyclerAdapter(util)
+        multiViewAdapter = MultiViewAdapter()
     }
 
     override fun onCreateView(
@@ -39,12 +41,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val baseViewModel = ViewModelProviders.of(this)[BaseViewModel::class.java]
         showLoadingCase()
-        prepareCategoryRecyclerView()
+        initAdapter()
+        val listSection = ListSection<Data>()
+        multiViewAdapter.registerItemBinders(BeerItemBinder(util))
+        multiViewAdapter.addSection(listSection)
         baseViewModel.observeBeers().observe(
             viewLifecycleOwner
         ) { i ->
             val beers = i!!.data
-            setMealsByCategoryAdapter(beers)
+            listSection.set(beers)
             cancelLoadingCase()
         }
     }
@@ -65,13 +70,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setMealsByCategoryAdapter(data: List<Data>) {
-        beerAdapter.setDataBeers(data)
-    }
-
-    private fun prepareCategoryRecyclerView() {
+    private fun initAdapter() {
         fragmentHomeBinding.recycleViewBeers.apply {
-            adapter = beerAdapter
+            adapter = multiViewAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
     }
