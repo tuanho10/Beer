@@ -32,6 +32,7 @@ class BeerItemBinder(util: Util) : ItemBinder<Data, BeerItemBinder.ViewHolder>()
             Glide.with(holder.itemView)
                 .load(beers.image)
                 .into(image)
+            buttonSave.isEnabled = !utilAdapter.isBeerSavedInDatabase(beers.id)
             buttonSave.setOnClickListener {
                 if (!utilAdapter.isBeerSavedInDatabase(beers.id)) {
                     val dataDB = DataDB(
@@ -48,6 +49,7 @@ class BeerItemBinder(util: Util) : ItemBinder<Data, BeerItemBinder.ViewHolder>()
                         contextAdapter!!.resources.getString(R.string.item_save),
                         Toast.LENGTH_SHORT
                     ).show()
+                    buttonSave.isEnabled = false
                 } else {
                     Toast.makeText(
                         contextAdapter,
